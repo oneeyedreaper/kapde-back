@@ -1,0 +1,98 @@
+erDiagram
+    Store ||--o{ Billboard : has
+    Store ||--o{ Category : has
+    Store ||--o{ Product : has
+    Store ||--o{ Size : has
+    Store ||--o{ Color : has
+    Store ||--o{ Order : has
+
+    Billboard ||--o{ Category : displays
+    Category ||--o{ Product : contains
+
+    Product ||--o{ Image : has
+    Product ||--o{ OrderItem : includes
+    Order ||--o{ OrderItem : contains
+    Size ||--o{ Product : defines
+    Color ||--o{ Product : defines
+
+    Store {
+        string id PK
+        string name
+        string userId
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Billboard {
+        string id PK
+        string storeId FK
+        string label
+        string imageUrl
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Category {
+        string id PK
+        string storeId FK
+        string billboardId FK
+        string name
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Product {
+        string id PK
+        string storeId FK
+        string categoryId FK
+        string name
+        decimal price
+        boolean isFeatured
+        boolean isArchived
+        string sizeId FK
+        string colorId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Order {
+        string id PK
+        string storeId FK
+        boolean isPaid
+        string phone
+        string address
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    OrderItem {
+        string id PK
+        string orderId FK
+        string productId FK
+    }
+
+    Size {
+        string id PK
+        string storeId FK
+        string name
+        string value
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Color {
+        string id PK
+        string storeId FK
+        string name
+        string value
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    Image {
+        string id PK
+        string productId FK
+        string url
+        datetime createdAt
+        datetime updatedAt
+    }
